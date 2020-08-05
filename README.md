@@ -4,6 +4,10 @@
 Тестовое задание для BGS-Group
 ```
 
+## TO-DO
+- [ ] Finish UI. Currently not implemented at all
+- [ ] Resolve login/logout issues in deployed version at Netlify
+
 ## Login credentials
 ```
 login: demo
