@@ -58,7 +58,7 @@ router.post('/logout', (req, res) => {
 })
 
 function isLoggedIn (req) {
-  return req.headers.authorization === `Bearer ${token}`
+  return req.session.authUser.token === token
 }
 
 // Export the server middleware
