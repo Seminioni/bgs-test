@@ -58,13 +58,20 @@ export default {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    proxy: true
+  },
+
+  proxy: {
+    '/api/': 'https://nuxt-bgs-test.herokuapp.com/'
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
