@@ -6,7 +6,7 @@
 
 ## TO-DO
 - [ ] Finish UI. Currently not implemented at all
-- [ ] Resolve login/logout issues in deployed version at Netlify
+- [x] Resolve login/logout issues in deployed version at Heroku
 
 ## Login credentials
 ```
