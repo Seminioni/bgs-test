@@ -3,8 +3,6 @@ import express from 'express'
 // Create express router
 const router = express.Router()
 
-// Transform req & res to have the same API as express
-// So we can use res.status() & res.json()
 const app = express()
 
 let token = null
@@ -14,6 +12,8 @@ const user = {
   password: 'demo'
 }
 
+// Transform req & res to have the same API as express
+// So we can use res.status() & res.json()
 router.use((req, res, next) => {
   Object.setPrototypeOf(req, app.request)
   Object.setPrototypeOf(res, app.response)
@@ -54,7 +54,7 @@ router.post('/logout', (req, res) => {
     res.json({ ok: true })
   }
 
-  res.status(401).send({ error: 'unauthorized' })
+  res.status(401).send({ error: 'Unauthorized' })
 })
 
 function isLoggedIn (req) {
