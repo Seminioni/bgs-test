@@ -40,6 +40,7 @@
                 color="#fff"
                 outlined
                 single-line
+                type="password"
                 class="text-field"
                 background-color="#fff"
                 label="Password"
