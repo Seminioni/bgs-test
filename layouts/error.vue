@@ -6,6 +6,7 @@
     <h1 v-else>
       {{ otherError }}
     </h1>
+
     <NuxtLink v-if="!$store.state.authUser" to="/">
       На главную
     </NuxtLink>
@@ -31,7 +32,7 @@ export default {
   data () {
     return {
       pageNotFound: '404 Not Found',
-      otherError: 'An error occurred'
+      otherError: 'Иди своей дорогой сталкер, ты так и не понял как войти в Зону...'
     }
   },
   head () {
