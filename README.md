@@ -10,8 +10,8 @@
 
 ## Login credentials
 ```
-login: demo
-password: demo
+login: stalker
+password: stalker
 ```
 
 ## Build Setup
