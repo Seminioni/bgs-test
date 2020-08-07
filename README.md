@@ -1,11 +1,11 @@
 # bgs-test
 
 ```
-Тестовое задание для BGS-Group
+Тестовое задание для BGS-Group на Nuxt.js, Vue.js, Vuetify
 ```
 
 ## TO-DO
-- [ ] Finish UI. Currently not implemented at all
+- [x] Finish UI. Currently not implemented at all
 - [x] Resolve login/logout issues in deployed version at Heroku
 
 ## Login credentials
