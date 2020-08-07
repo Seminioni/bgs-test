@@ -1,25 +1,44 @@
 <template>
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8 md6>
-      <form v-if="!$store.state.authUser" @submit.prevent="login">
-        <p v-if="formError" class="error">
-          {{ formError }}
-        </p>
-        <p>
-          <i>To login, use <b>demo</b> as name and <b>demo</b> as
-            password.</i>
-        </p>
-        <p>
-          Name: <input v-model="formName" type="text" name="name">
-        </p>
-        <p>
-          Password:
-          <input v-model="formPassword" type="password" name="password">
-        </p>
-        <button type="submit">
-          Login
-        </button>
-      </form>
+      <v-form v-if="!$store.state.authUser" v-model="valid" @submit.prevent="login">
+        <v-container>
+          <p>
+            <i>To login, use <b>demo</b> as name and <b>demo</b> as
+              password.</i>
+          </p>
+          <p v-if="formError" class="error">
+            {{ formError }}
+          </p>
+          <v-row>
+            <v-col
+              cols="12"
+              md="12"
+            >
+              <v-text-field
+                v-model="formName"
+                :rules="nameRules"
+                label="Username"
+                required
+              />
+            </v-col>
+
+            <v-col
+              cols="12"
+              md="12"
+            >
+              <v-text-field
+                v-model="formPassword"
+                label="Password"
+                required
+              />
+            </v-col>
+            <button type="submit">
+              Login
+            </button>
+          </v-row>
+        </v-container>
+      </v-form>
       <div v-else>
         Hello {{ $store.state.authUser.name }}!
         <img :src="$store.state.authUser.image">
