@@ -1,15 +1,22 @@
 <template>
-  <v-app dark>
+  <v-container>
     <h1 v-if="error.statusCode === 404">
       {{ pageNotFound }}
     </h1>
     <h1 v-else>
       {{ otherError }}
     </h1>
-    <NuxtLink to="/">
-      Home page
+    <NuxtLink v-if="!$store.state.authUser" to="/">
+      На главную
     </NuxtLink>
-  </v-app>
+
+    <NuxtLink
+      v-else
+      to="/putnik"
+    >
+      На страницу путника
+    </NuxtLink>
+  </v-container>
 </template>
 
 <script>
@@ -40,5 +47,6 @@ export default {
 <style scoped>
 h1 {
   font-size: 20px;
+  color: white;
 }
 </style>

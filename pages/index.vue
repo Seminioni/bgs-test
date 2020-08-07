@@ -1,23 +1,35 @@
 <template>
-  <v-layout column justify-center align-center>
-    <v-flex xs12 sm8 md6>
-      <v-form v-if="!$store.state.authUser" v-model="valid" @submit.prevent="login">
-        <v-container>
-          <p>
-            <i>To login, use <b>demo</b> as name and <b>demo</b> as
-              password.</i>
-          </p>
-          <p v-if="formError" class="error">
-            {{ formError }}
-          </p>
-          <v-row>
+  <v-container>
+    <v-form v-if="!$store.state.authUser" class="login-form" @submit.prevent="login">
+      <v-container>
+        <v-row>
+          <v-col
+            cols="12"
+            lg="12"
+          >
             <v-col
               cols="12"
-              md="12"
+              lg="12"
+            >
+              <h2>
+                <p><i>Stalker</i>, твой логин и пароль</p>
+                <p>для входа в Зону — <strong>stalker</strong>!</p>
+              </h2>
+
+              <p v-if="formError" class="error">
+                {{ formError }}
+              </p>
+            </v-col>
+
+            <v-col
+              cols="12"
+              lg="12"
             >
               <v-text-field
                 v-model="formName"
-                :rules="nameRules"
+                outlined
+                single-line
+                background-color="#fff"
                 label="Username"
                 required
               />
@@ -25,40 +37,61 @@
 
             <v-col
               cols="12"
-              md="12"
+              lg="12"
             >
               <v-text-field
                 v-model="formPassword"
+                color="#fff"
+                outlined
+                single-line
+                class="text-field"
+                background-color="#fff"
                 label="Password"
                 required
               />
             </v-col>
-            <button type="submit">
-              Login
-            </button>
-          </v-row>
-        </v-container>
-      </v-form>
-      <div v-else>
-        Hello {{ $store.state.authUser.name }}!
-        <img :src="$store.state.authUser.image">
-        <pre>
-I am the secret content, I am shown only when the user is connected.</pre>
-        <p><i>You can also refresh this page, you'll still be connected!</i></p>
-        <button @click="logout">
-          Logout
-        </button>
-      </div>
-      <p>
-        <NuxtLink to="/secret">
-          Super secret page
-        </NuxtLink>
-      </p>
-    </v-flex>
-  </v-layout>
+            <v-col
+              cols="12"
+              md="8"
+            >
+              <v-btn @click="login">
+                Логин
+              </v-btn>
+            </v-col>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-form>
+
+    <v-form
+      v-else
+      @submit.prevent="logout"
+    >
+      <v-container>
+        <v-row>
+          <v-col
+            cols="12"
+            lg="12"
+          >
+            <v-btn @click="logout">
+              Логаут
+            </v-btn>
+            <v-btn>
+              <NuxtLink v-if="$store.state.authUser" to="/putnik">
+                В профиль
+              </NuxtLink>
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-form>
+  </v-container>
 </template>
 
 <script>
+import { logout } from '@/modules/logout.js'
+import { login } from '@/modules/login.js'
+
 export default {
   data () {
     return {
@@ -68,26 +101,61 @@ export default {
     }
   },
   methods: {
-    async login () {
-      try {
-        await this.$store.dispatch('login', {
-          name: this.formName,
-          password: this.formPassword
-        })
-        this.formName = ''
-        this.formPassword = ''
-        this.formError = null
-      } catch (e) {
-        this.formError = e.message
-      }
+    logout () {
+      logout.bind(this)()
     },
-    async logout () {
-      try {
-        await this.$store.dispatch('logout')
-      } catch (e) {
-        this.formError = e.message
-      }
+
+    async login () {
+      await login.bind(this)()
+      this.$router.push('/putnik')
     }
   }
 }
 </script>
+
+<style>
+  .v-application--wrap {
+    background-color: black;
+  }
+
+  .login-form {
+    z-index: 1;
+    position: relative;
+    max-width: 367px;
+    border: 1px solid gray;
+    border-radius: 13px;
+    background-image: url('~assets/images/form-bg.jpg');
+    background-size: cover;
+  }
+
+  .login-form {
+    color: white;
+  }
+
+  .login-form h2 {
+    line-height: 1.1;
+    font-weight: normal;
+  }
+
+  .login-form h2 strong {
+    color: yellow;
+    /* text-decoration: underline; */
+  }
+
+  .login-form h2 p {
+    background-color:black;
+    margin-bottom: 0;
+  }
+
+  .login-form h2 p + p {
+    margin-top: 2px;
+  }
+
+  .text-field {
+    color: white;
+  }
+
+  .error {
+    margin-top: 15px;
+  }
+</style>
