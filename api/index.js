@@ -8,8 +8,8 @@ const app = express()
 let token = null
 const user = {
   image: 'https://avatars2.githubusercontent.com/u/16149737?s=460&u=e06a19dcf14661616bb1b9c7d7ac94ed69fd69cc&v=4',
-  name: 'demo',
-  password: 'demo'
+  name: 'stalker',
+  password: 'stalker'
 }
 
 // Transform req & res to have the same API as express
