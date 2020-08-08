@@ -41,15 +41,17 @@
 </template>
 
 <script>
-import { logout } from '@/modules/logout.js'
-
 export default {
   middleware: ['auth'],
 
   methods: {
-    async logout () {
-      await logout.bind(this)()
-      this.$router.push('/')
+    logout () {
+      try {
+        this.$store.dispatch('logout')
+        this.$router.push('/')
+      } catch (e) {
+        this.formError = e.message
+      }
     }
   }
 }

@@ -90,8 +90,6 @@
 </template>
 
 <script>
-import { logout } from '@/modules/logout.js'
-
 export default {
   data () {
     return {
@@ -102,7 +100,11 @@ export default {
   },
   methods: {
     logout () {
-      logout.bind(this)()
+      try {
+        this.$store.dispatch('logout')
+      } catch (e) {
+        this.formError = e.message
+      }
     },
 
     async login () {
