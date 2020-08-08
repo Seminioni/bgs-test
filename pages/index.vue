@@ -15,6 +15,10 @@
                 <p><i>Stalker</i>, твой логин и пароль</p>
                 <p>для входа в Зону — <strong>stalker</strong>!</p>
               </h2>
+
+              <p v-if="formError" class="error">
+                {{ formError }}
+              </p>
             </v-col>
 
             <v-col
