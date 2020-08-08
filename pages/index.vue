@@ -91,7 +91,6 @@
 
 <script>
 import { logout } from '@/modules/logout.js'
-import { login } from '@/modules/login.js'
 
 export default {
   data () {
@@ -107,8 +106,18 @@ export default {
     },
 
     async login () {
-      await login.bind(this)()
-      this.$router.push('/putnik')
+      try {
+        await this.$store.dispatch('login', {
+          name: this.formName,
+          password: this.formPassword
+        })
+        this.formName = ''
+        this.formPassword = ''
+        this.formError = null
+        this.$router.push('/putnik')
+      } catch (e) {
+        this.formError = e.message
+      }
     }
   }
 }
